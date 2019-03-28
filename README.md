@@ -29,6 +29,6 @@
     2,2018-03-27,李四,"{age:21,sex:0,tall:166,description:'12345678',favoriteSport:'football,basketball,swim'}"
     3,2018-03-28,王五,"{age:18,sex:0}"
     4,2018-03-28,王五,"{age:21,sex:1,weight:77,description:'abcdefg',tall:178}"
-    查询条件为时间段startDate,endDate,创建人creatorName,年龄age,性别sex,描述description
+    类似这样的数据有100条，要求查询要做分页，查询条件为时间段startDate,endDate,创建人creatorName,年龄age,性别sex,描述description
     该如何实现对数据的查询呢？
     
