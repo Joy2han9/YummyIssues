@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace issue5
 {
@@ -19,7 +20,7 @@ namespace issue5
 */
         static void Main(string[] args)
         {
-            var result = LongestPalindrome("aaabaaa");
+            var result = LongestPalindrome("abcdcbabcba");
 
             Console.WriteLine(result);
             Console.ReadKey();
@@ -27,15 +28,34 @@ namespace issue5
 
         public static string LongestPalindrome(string s)
         {
-            var tempStr = s;
-
-            for(var i = 0; i < s.Length; i++)
+            var start = 0;
+            var maxLength = 0;
+            for (var i = 0; i < s.Length; i++)
             {
-                var current = s[i];
-                tempStr = tempStr.Substring(i);
+                var len1 = ExpandAroundCenter(s, i, i);
+                var len2 = ExpandAroundCenter(s, i, i + 1);
+                var len = Math.Max(len1, len2);
+                if (len > maxLength)
+                {
+                    start = i - (len - 1) / 2;
+                    maxLength = len;
+                }
             }
 
-            return tempStr;
+            return s.Substring(start, maxLength);
+        }
+
+        static int ExpandAroundCenter(string s, int left, int right)
+        {
+            var i = left;
+            var j = right;
+            while (i >= 0 && j < s.Length && s[i] == s[j])
+            {
+                i--;
+                j++;
+            }
+
+            return j - i - 1;
         }
     }
 }
