@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ConsoleApp1
 {
@@ -23,7 +25,74 @@ namespace ConsoleApp1
          */
         static void Main(string[] args)
         {
+            var result = FourSum(new int[] { 1, 0, -1, 0, -2, 2 }, 0);
 
+            Console.WriteLine(result);
+            Console.ReadKey();
+        }
+
+        public static IList<IList<int>> FourSum(int[] nums, int target)
+        {
+
+            var result = new List<IList<int>>();
+            int[] num = nums.OrderBy(x => x).ToArray();
+            int start, end, temp;
+            for (int i = 0; i < num.Length; i++)
+            {
+                if (i != 0 && num[i] == num[i - 1])
+                {
+                    continue;
+                }
+
+                for (int j = i+1; j < num.Length; j++)
+                {
+                    if(j!=i+1 && num[j] == num[j - 1])
+                    {
+                        continue;
+                    }
+
+                    var current = num[i] + num[j];
+                    start = j + 1;
+                    end = num.Length - 1;
+                    while (start < end)
+                    {
+                        if (start != j + 1&& num[start] == num[start - 1])
+                        {
+                            start++;
+                            continue;
+                        }
+
+                        temp = num[start] + num[end];
+
+                        if (temp + current ==target)
+                        {
+
+                            List<int> list = new List<int>(3);
+
+                            list.Add(num[i]);
+                            list.Add(num[j]);
+
+                            list.Add(num[start]);
+
+                            list.Add(num[end]);
+
+                            result.Add(list);
+
+                            start++; end--;
+                        }
+                        else if (temp+ current > target)
+                        {
+                            end--;
+                        }
+
+                        else
+                        {
+                            start++;
+                        }
+                    }
+                }
+            }
+            return result;
         }
     }
 }
