@@ -33,8 +33,11 @@ namespace ConsoleApp1
 
         public static IList<IList<int>> FourSum(int[] nums, int target)
         {
-
             var result = new List<IList<int>>();
+            if(nums.Length <= 3)
+            {
+                return result;
+            }
             int[] num = nums.OrderBy(x => x).ToArray();
             int start, end, temp;
             for (int i = 0; i < num.Length; i++)
