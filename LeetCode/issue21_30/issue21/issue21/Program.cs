@@ -123,10 +123,5 @@ namespace issue21
             this.val = val;
             this.next = next;
         }
-
-        internal ListNode First()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
