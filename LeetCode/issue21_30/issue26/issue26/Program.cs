@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace issue26
 {
@@ -37,16 +38,13 @@ namespace issue26
 
         public static int RemoveDuplicates(int[] nums)
         {
-            if (nums.Length == 0) return 0;
-            var count = 1;
-            for (var i = 1; i < nums.Length; i++)
+            var newNums = nums.Distinct().ToArray();
+            for (int i = 0; i < newNums.Length; i++)
             {
-                if (nums[i] != nums[i - 1])
-                {
-                    nums[count++] = nums[i];
-                }
+                nums[i] = newNums[i];
             }
-            return count;
+
+            return newNums.Length;
         }
     }
 }
