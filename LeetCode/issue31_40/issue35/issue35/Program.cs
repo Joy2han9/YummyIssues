@@ -34,11 +34,7 @@ namespace issue35
 
         public static int SearchInsert(int[] nums, int target)
         {
-            if (nums[0] > target)
-            {
-                return 0;
-            }
-
+           
             if (nums[nums.Length - 1] < target)
             {
                 return nums.Length;
