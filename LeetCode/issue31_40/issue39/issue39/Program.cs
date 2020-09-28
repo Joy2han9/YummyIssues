@@ -43,21 +43,21 @@ namespace issue39
          */
         static void Main(string[] args)
         {
-            var result = CombinationSum1(new int[] { 2,3,7 }, 18);
+            var result = CombinationSum2(new int[] { 2,3,7 }, 18);
         }
 
-        public static IList<IList<int>> CombinationSum(int[] candidates, int target)
+        public static IList<IList<int>> CombinationSum1(int[] candidates, int target)
         {
-            var res = new List<IList<int>>();
-            var now = candidates.Where(x => x <= target).ToList();
-            FindP(new List<int>(), now);
-            return res;
+            var result = new List<IList<int>>();
+            var useful = candidates.Where(x => x <= target).ToList();
+            FindP(new List<int>(), useful);
+            return result;
 
             void FindP(List<int> path, List<int> choose)
             {
                 if (path.Sum().Equals(target))
                 {
-                    res.Add(path);
+                    result.Add(path);
                 }
                 else if (path.Sum() < target)
                 {
@@ -71,7 +71,35 @@ namespace issue39
             }
         }
 
-        public static IList<IList<int>> CombinationSum1(int[] candidates, int target)
+        public static IList<IList<int>> CombinationSum2(int[] candidates, int target)
+        {
+            var res = new List<IList<int>>();
+            var now = candidates.Where(x => x <= target).OrderBy(x => x).ToArray();
+            FindP(new List<int>(), now.Length - 1, 0);
+            return res;
+
+            void FindP(List<int> path, int end, int sum)
+            {
+                if (sum.Equals(target))
+                {
+                    res.Add(path);
+                }
+                else if (sum < target)
+                {
+                    int need = target - sum;
+                    while (end >= 0 && now[end] > need)
+                    {
+                        end--;
+                    }
+                    for (; end >= 0; end--)
+                    {
+                        FindP(new List<int>(path) { now[end] }, end, sum + now[end]);
+                    }
+                }
+            }
+        }
+
+        public static IList<IList<int>> CombinationSum3(int[] candidates, int target)
         {
             var result = new List<IList<int>>();
             var temp = GetAllCombination(candidates, target);
