@@ -32,7 +32,6 @@ namespace issue48
             
             var tempI = 0;
             var tempJ = 0;
-            var temp = 0;
             for(var i = 0; i < length; i++)
             {
                 for(var j = length - 1; j >= 0; j--)
