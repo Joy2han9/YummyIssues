@@ -31,10 +31,14 @@ namespace issue55
 
         public static bool CanJump(int[] nums)
         {
+            if (nums.Length == 1)
+            {
+                return true;
+            }
             var result = false;
-            var length = nums.Length-1;
+            var length = nums.Length - 1;
             var currentMax = 0;
-            for(var i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 currentMax = Math.Max(currentMax, i + nums[i]);
                 if (currentMax >= length)
@@ -42,9 +46,9 @@ namespace issue55
                     return true;
                 }
 
-                if(nums[i] == 0)
+                if (nums[i] == 0)
                 {
-                    if (currentMax >= i+1)
+                    if (currentMax >= i + 1)
                     {
                         continue;
                     }
