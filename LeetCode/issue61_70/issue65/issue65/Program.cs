@@ -41,8 +41,8 @@ namespace issue65
 
         public static bool IsNumber(string s)
         {
-            var reg = @"^\s*[+-]?(?:\d+|(?=.\d))(?:.\d*)?(?:e[+-]?\d+)?\s*$";
-            return System.Text.RegularExpressions.Regex.IsMatch(s, reg);
+            System.Text.RegularExpressions.Regex pattern = new System.Text.RegularExpressions.Regex(@"^\s*[+-]?(?:\d+|(?=\.\d))(?:\.\d*)?(?:e[+-]?\d+)?\s*$");
+            return pattern.IsMatch(s);
         }
 
         public static bool IsNumber1(string s)
