@@ -1,22 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace issue77
+namespace issue78
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var n = 4;
-            var k = 2;
-            var result = Combine(n, k);
+            var nums = new int[] { 1,5};
+            var result = Subsets(nums);
             Console.ReadKey();
         }
 
-        public static IList<IList<int>> Combine(int n, int k)
+        public static IList<IList<int>> Subsets(int[] nums)
+        {
+            var result = new List<IList<int>>()
+            {
+                new List<int>()
+            };
+            if (nums.Length == 0)
+            {
+                return result;
+            }
+            var myList = nums.ToList();
+            for(var i = 1; i <= nums.Length; i++)
+            {
+                result.AddRange(GetCombination(myList, i));
+            }
+
+            return result;
+        }
+
+        public IList<IList<int>> Combine(int n, int k)
         {
             var myList = new List<int>();
-            for(var i = 1; i <= n; i++)
+            for (var i = 1; i <= n; i++)
             {
                 myList.Add(i);
             }
